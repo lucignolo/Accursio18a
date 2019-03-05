@@ -1,0 +1,2 @@
+class LpublishersController < ApplicationController
+end

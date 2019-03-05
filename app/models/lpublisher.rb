@@ -1,0 +1,2 @@
+class Lpublisher < ApplicationRecord
+end
