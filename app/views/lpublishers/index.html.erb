@@ -1,1 +1,6 @@
 <h1> Mi trovate in lpublishers#index </h1>
+<h3> provare per credere !!! </h3>
+
+<% @lpubs.each do |lp| %>
+	<p>Attributi per il record <%= lp.id %>: <%= lp.ID_EDITORE%>,<%= lp.Nome %></p>
+<% end %>
