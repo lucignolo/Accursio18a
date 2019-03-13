@@ -1,8 +1,7 @@
 class LpublishersController < ApplicationController
 	def index()
-		#@lpub2 = Lpublisher.find(2)
-		#@lpub50 = Lpublisher.find(50)
-		#---@lpubs = Lpublisher.primi_n_record(1,4)
+		mio_hash = Lpublisher.analisi1(1300)
+		@info1 = "#{mio_hash[:nome]}: #{mio_hash[:quanti]}. Sul totale di: #{mio_hash[:tuttiquanti]} record in tabella."
 		@lpubs = Lpublisher.ssqq(5)
 	end
 
