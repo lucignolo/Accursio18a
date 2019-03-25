@@ -4,3 +4,6 @@
 <% @lpubs.each do |lp| %>
 	<p>Attributi per il record <%= lp.id %>: <%= lp.ID_EDITORE%>,<%= lp.Nome %></p>
 <% end %>
+
+<%= link_to "INDICE delle RICERCHE già eseguite", searches_path() %>
+<%= link_to "Impostare una NUOVA RICERCA", new_search_path() %>

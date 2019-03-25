@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= render 'layouts/rails_default.html.erb' %>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+       <div class="col-md-24 col-lg-12">
+        .col-md-24
+        <%= yield %>
+       </div> 
+      </div>
+      
+      <div class="row">
+        <div class="col-md-4 col-lg-6" id="area_bassa_sinistra">
+          <p>.col-md-4 col-lg-6 areabassasinistra: appare a sinistra</p> <%=yield(:materiale1) %></div>
+        <div class="col-md-4 col-lg-6" id="area_bassa_destra">
+          <p>.col-md-4 col-lg-6  areabassadestra: appare a destra</p>   <%=yield(:materiale2) %></div>
+      </div>
+      
+      <div class="row">
+        <%= render 'layouts/footer.html.erb' %>
+        <%= debug(params) if Rails.env.development? %>
+      </div>
+      
+    </div>
+    
+    <% if @ugo_lay_1 %>
+    <div style="padding:10px; 
+      width:300px; height:auto; border:10px solid green;">
+      Testo, immagini e quant'altro si voglia inserire come testo all'interno di questo box.
+    </div>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 provacella">.col-md-6</div>
+        <div class="col-md-6 provacella">.col-md-6</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 provacella">.col-md-4</div>
+        <div class="col-md-4 provacella">.col-md-4</div>
+        <div class="col-md-4 provacella">.col-md-4</div>
+      </div>
+      <h3> fine della prova </h3>
+    </div>
+    <% end %>
+
+  </body>
+</html>
