@@ -1,13 +1,17 @@
+<%= provide(:title, ApplicationHelper::VIEWTITLES[:searches][:show]) %>
+<% provide(:materiale2, "Descrizione: #{@descrizione}") %>
+<h1>Dettaglio della Ricerca</h1>
+
 <p id="notice"><%= notice %></p>
-<%= [1, 2, 3, 4, 5].inspect %>
+
 <p>
   <strong>Tabella:</strong>
-  <%= @search.tabella %>
+  <%= @search.tabella %> <%= @mia_tabella %>
 </p>
 
 <p>
   <strong>Campo:</strong>
-  <%= @search.campo %>
+  <%= @search.campo %> <%= @mio_campo %>
 </p>
 
 <p>
@@ -17,18 +21,22 @@
 
 <p>
   <strong>Data:</strong>
-  <%= @search.data %>
+  <%= @search.data %> <%= "[ #{distance_of_time_in_words_to_now(@search.data, options = {include_seconds: true})} ]" %>
 </p>
 
+  
 <p>
   <strong>Occorrenze:</strong>
   <%= @search.occorrenze %>
 </p>
 
+<p>
+  <strong>Tipo:</strong>
+  <%= @search.tipo %> <%= @mio_tipo %>
+</p>
+
 <%= link_to 'Edit', edit_search_path(@search) %> |
 <%= link_to 'Back', searches_path %>
-
-
 
 <h3>In totale esistono <%= @lpublishersNonBidoni %> elementi cercabili (su un totale di <%= @lpublishersTotali %> Editori-lpublishers).</h3>
 <h3>L'esito di questa ricerca sarà costituito da <%= @numeroFiltrati %> elementi.</h3>

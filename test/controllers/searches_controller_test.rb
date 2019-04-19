@@ -17,7 +17,7 @@ class SearchesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create search" do
     assert_difference('Search.count') do
-      post searches_url, params: { search: { argomento: @search.argomento, campo: @search.campo, data: @search.data, occorrenze: @search.occorrenze, tabella: @search.tabella } }
+      post searches_url, params: { search: { argomento: @search.argomento, campo: @search.campo, data: @search.data, occorrenze: @search.occorrenze, tabella: @search.tabella, tipo: @search.tipo } }
     end
 
     assert_redirected_to search_url(Search.last)
@@ -34,7 +34,7 @@ class SearchesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update search" do
-    patch search_url(@search), params: { search: { argomento: @search.argomento, campo: @search.campo, data: @search.data, occorrenze: @search.occorrenze, tabella: @search.tabella } }
+    patch search_url(@search), params: { search: { argomento: @search.argomento, campo: @search.campo, data: @search.data, occorrenze: @search.occorrenze, tabella: @search.tabella, tipo: @search.tipo } }
     assert_redirected_to search_url(@search)
   end
 

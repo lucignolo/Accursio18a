@@ -6,13 +6,21 @@ class SearchesController < ApplicationController
   # GET /searches.json
   def index
     @searches = Search.all
+    # inserita la seguente in winaccursio18 dopo errori
+    @search = Search.new
   end
 
   # GET /searches/1
   # GET /searches/1.json
   def show
-    # materiale ripreso dallo scorso anno in data 13/03/2019 a Modena
-    # Accedo -da questo mondo del Search model- allo Lpublisher model
+    @mia_tabella = Search.mia_tabella(@search.tabella)
+    @mio_campo   = Search.mio_campo(@search.campo)
+    @mio_tipo    = Search.mio_tipo(@search.tipo)
+    #
+    @descrizione = @search.descrivi()
+
+    # materiale ripreso dallo scorso anno in data 13/03/2019 a Modena ==============================
+    # Accedo -da questo mondo del Search model- allo Lpublisher model ==============================
     @lpublishersTotali = "#{Lpublisher.all.count}"
     @lpublishersNonBidoni = 900  #@lpublishersTotali-5  #"#{Publisher.nonbidoni.count}"
 
@@ -43,6 +51,8 @@ class SearchesController < ApplicationController
     #mioPara2 = "%"+@search.argomento+"%"
     trovati = Lpublisher.likeat("#{mioPara2}")
     @numeroFiltrati = "#{trovati.count}"
+    # ==============================================================================================  
+
   end
 
   # GET /searches/new
@@ -59,13 +69,10 @@ class SearchesController < ApplicationController
   def create
     @search = Search.new(search_params)
 
-    logger.debug "Nuova search: #{@search.attributes.inspect}"
-    logger.debug "Search should be valid: #{@search.valid?}"
-
-
     respond_to do |format|
       if @search.save
-        format.html { redirect_to @search, notice: 'Search was successfully created.' }
+        format.html { redirect_to @search, notice: 'Ricerca creata con successo' }
+        format.js
         format.json { render :show, status: :created, location: @search }
       else
         format.html { render :new }
@@ -73,6 +80,16 @@ class SearchesController < ApplicationController
       end
     end
   end
+
+  def createprova1
+    @search = Search.first
+    respond_to do |format|
+           format.html { redirect_to @search, notice: 'Da creapteprova1 ok.' }
+           format.js
+           format.json { render :show, status: :created, location: @search }
+    end
+  end
+
 
   # PATCH/PUT /searches/1
   # PATCH/PUT /searches/1.json
@@ -106,6 +123,6 @@ class SearchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def search_params
-      params.require(:search).permit(:tabella, :campo, :argomento, :data, :occorrenze)
+      params.require(:search).permit(:tabella, :campo, :argomento, :data, :occorrenze, :tipo)
     end
 end

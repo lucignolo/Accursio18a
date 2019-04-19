@@ -20,11 +20,12 @@ ActiveRecord::Schema.define(version: 201903051200000) do
   end
 
   create_table "searches", force: :cascade do |t|
-    t.string "tabella"
-    t.string "campo"
+    t.integer "tabella"
+    t.integer "campo"
     t.string "argomento"
     t.date "data"
     t.integer "occorrenze"
+    t.integer "tipo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

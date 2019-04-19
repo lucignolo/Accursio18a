@@ -19,6 +19,7 @@ class SearchesTest < ApplicationSystemTestCase
     fill_in "Data", with: @search.data
     fill_in "Occorrenze", with: @search.occorrenze
     fill_in "Tabella", with: @search.tabella
+    fill_in "Tipo", with: @search.tipo
     click_on "Create Search"
 
     assert_text "Search was successfully created"
@@ -34,6 +35,7 @@ class SearchesTest < ApplicationSystemTestCase
     fill_in "Data", with: @search.data
     fill_in "Occorrenze", with: @search.occorrenze
     fill_in "Tabella", with: @search.tabella
+    fill_in "Tipo", with: @search.tipo
     click_on "Update Search"
 
     assert_text "Search was successfully updated"

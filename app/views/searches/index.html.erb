@@ -1,35 +1,43 @@
+<%= provide(:title, ApplicationHelper::VIEWTITLES[:searches][:index]) %>
+
+<p id="notice"><%= notice %></p>
+
+<% provide(:materiale1, content_tag(:div, content_tag(:p, "Vecchio Hello world!"), class: "strong")) %>
+<% continua = content_tag(:p,"Secondo Hello world!!") %><% provide(:materiale1, continua) %>
+
+<% provide(:materiale2, "index con modifiche da C9, definita in index,html.erb") %>
+
+<a href="#" data-background-color="#990000">Sfondo Rosso</a>
+<a href="#" data-background-color="#009900" data-text-color="FFFFFF">Bianco su Verde</a>
+<a href="#" data-background-color="#000099" data-text-color="FFFFFF">Bianco su Blu</a>
+
+
 <p id="notice"><%= notice %></p>
 
 <h1>Searches</h1>
+<ul id="searches">
+  <%= render @searches %>
+</ul>  
 
-<table>
-  <thead>
-    <tr>
-      <th>Tabella</th>
-      <th>Campo</th>
-      <th>Argomento</th>
-      <th>Data</th>
-      <th>Occorrenze</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @searches.each do |search| %>
-      <tr>
-        <td><%= search.tabella %></td>
-        <td><%= search.campo %></td>
-        <td><%= search.argomento %></td>
-        <td><%= search.data %></td>
-        <td><%= search.occorrenze %></td>
-        <td><%= link_to 'Show', search %></td>
-        <td><%= link_to 'Edit', edit_search_path(search) %></td>
-        <td><%= link_to 'Destroy', search, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 <br>
+<%= form_with(model: @search) do |f| %>
+  <%= f.label :tabella %> <br>
+  <%= f.text_field :tabella %>
+  <%= f.label :campo %> <br>
+  <%= f.text_field :campo %>
+  <%= f.label :argomento %> <br>
+  <%= f.text_field :argomento %>
+  <%= f.label :data %> <br>
+  <%= f.text_field :data %>
+  <%= f.label :tipo %> <br>
+  <%= f.text_field :tipo %>
+  <%= f.label :occorrenze %> <br>
+  <%= f.text_field :occorrenze %>
+
+   <%= f.submit %>
+<% end %>
+<br>
+<%= button_to "TEST createprova1", miaprova1_path, remote: true %>
 
 <%= link_to 'New Search', new_search_path %>
