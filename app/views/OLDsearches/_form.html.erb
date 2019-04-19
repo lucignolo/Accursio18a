@@ -1,0 +1,47 @@
+<%= form_with(model: search, local: true) do |form| %>
+  <% if search.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(search.errors.count, "error") %> prohibited this search from being saved:</h2>
+
+      <ul>
+      <% search.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :tabella %>
+    <%= form.select(:tabella, options_for_select(Search::SEL_OPTIONS_TABELLE, 1) ) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :campo %>
+    <%= form.select(:campo, options_for_select(Search::SEL_OPTIONS_CAMPI, 2) ) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :argomento %>
+    <%= form.text_field :argomento, id: :search_argomento %>
+  </div>
+
+  <div class="field">
+    <%= form.label :data %>
+    <%= form.date_select :data, id: :search_data %>
+  </div>
+
+  <div class="field">
+    <%= form.label :occorrenze %>
+    <%= form.number_field :occorrenze, id: :search_occorrenze %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tipo %>
+    <%= form.select(:tipo, options_for_select(Search::SELOPTIONS, 2) ) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
