@@ -12,6 +12,13 @@
 
 ActiveRecord::Schema.define(version: 201903051200000) do
 
+  create_table "ellepublishers", force: :cascade do |t|
+    t.integer "ID_EDITORE"
+    t.string "Nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "lpublishers", force: :cascade do |t|
     t.integer "ID_EDITORE"
     t.string "Nome"

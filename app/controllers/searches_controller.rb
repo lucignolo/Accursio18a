@@ -1,12 +1,13 @@
 class SearchesController < ApplicationController
-  before_action :set_search, only: [:show, :edit, :update, :destroy]
+  before_action :set_search, only: [:show, :edit, :update, :destroy, :eseguiRicerca
+  ]
     layout "special_layout"
 
   # GET /searches
   # GET /searches.json
   def index
     @searches = Search.all
-    # inserita la seguente in winaccursio18 dopo errori
+    # prova Ajax 31/03/2019
     @search = Search.new
   end
 
@@ -18,41 +19,6 @@ class SearchesController < ApplicationController
     @mio_tipo    = Search.mio_tipo(@search.tipo)
     #
     @descrizione = @search.descrivi()
-
-    # materiale ripreso dallo scorso anno in data 13/03/2019 a Modena ==============================
-    # Accedo -da questo mondo del Search model- allo Lpublisher model ==============================
-    @lpublishersTotali = "#{Lpublisher.all.count}"
-    @lpublishersNonBidoni = 900  #@lpublishersTotali-5  #"#{Publisher.nonbidoni.count}"
-
-    @search = Search.find(params[:id])
-    # --- aggiungiamo un suffisso
-    @search.assegnaSuffisso("qq")
-    # --- riprendiamo
-    @ricerca = "likeat"+@search.argomento
-
-    # eseguiamo un filtraggio preliminare e calcoliamo il numero di elementi che lo soddisfano
-    mio_suffisso  = @search.analArg()[:para]
-    mio_argomento = @search.analArg()[:nome]
-    case
-      when mio_suffisso = nil
-        mioPara2 = "%"+mio_argomento+"%"
-        @ricerca = "likeat"+@search.argomento
-      when mio_suffisso == "ii"  
-        mioPara2 = mio_argomento+"%"
-        @ricerca = "likeat"+mio_argomento
-      when mio_suffisso == "qq"
-        mioPara2 = "%"+mio_argomento+"%"
-        @ricerca = "likeat"+@search.argomento
-      when mio_suffisso == "ff"
-        mioPara2 = "%"+mio_argomento
-        @ricerca = "likeat"+mio_argomento
-      else  
-    end
-    #mioPara2 = "%"+@search.argomento+"%"
-    trovati = Lpublisher.likeat("#{mioPara2}")
-    @numeroFiltrati = "#{trovati.count}"
-    # ==============================================================================================  
-
   end
 
   # GET /searches/new
@@ -71,7 +37,7 @@ class SearchesController < ApplicationController
 
     respond_to do |format|
       if @search.save
-        format.html { redirect_to @search, notice: 'Ricerca creata con successo' }
+        format.html { redirect_to @search, notice: 'Search was successfully created.' }
         format.js
         format.json { render :show, status: :created, location: @search }
       else
@@ -80,7 +46,7 @@ class SearchesController < ApplicationController
       end
     end
   end
-
+  
   def createprova1
     @search = Search.first
     respond_to do |format|
@@ -89,7 +55,7 @@ class SearchesController < ApplicationController
            format.json { render :show, status: :created, location: @search }
     end
   end
-
+ 
 
   # PATCH/PUT /searches/1
   # PATCH/PUT /searches/1.json
@@ -114,7 +80,52 @@ class SearchesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def eseguiRicerca
+    @search = Search.find(params[:id]) 
+    # qui chiamiamo un metodo della classe Search, che restituisce una stringa codificata
+    # del tipo TCtAAA, con T=tabella; C=campo; t=tipo; AAA=argomento
+    @codice = @search.tabella.to_s+@search.campo.to_s+@search.tipo.to_s+@search.argomento
+    # selezione della struttura della ricerca
+    case
+       when @codice[0,3] == '122'
+         @comando0 = {tabella: 'lpublishers', campo: 'Nome', tipo: 'LIKEmez', argomento: @codice[3,] }
+         # esegue la query:
+            mioPara = @search.argomento
+            mioPara2 = "%"+mioPara+"%"
+            @lpubs = Lpublisher.nome_likeat_mid("#{mioPara2}")  
+            @risultati = @lpubs.size
+       #end
+       
+       when @codice[0,3] == '123'
+         @comando0 = {tabella: 'lpublishers', campo: 'Nome', tipo: 'LIKEini', argomento: @codice[3,] }
+         # esegue la query:
+            mioPara = @search.argomento
+            mioPara2 = mioPara+"%"
+            @lpubs = Lpublisher.nome_likeat_ini("#{mioPara2}")  
+            @risultati = @lpubs.size
+            
+       when @codice[0,3] == "124"      
+         @comando0 = {tabella: 'lpublishers', campo: 'Nome', tipo: 'LIKEfin', argomento: @codice[3,] }
+         # esegue la query:
+            mioPara = @search.argomento
+            mioPara2 = "%"+mioPara
+            @lpubs = Lpublisher.nome_likeat_fin("#{mioPara2}")  
+            @risultati = @lpubs.size       
+       #end
+       #
+       else
+         @comando0 ={}
+     end
+     # qui abbiamo tutto per impostare la ricerca in tutti i casi
 
+     
+  end  #eseguiRicerca
+
+
+     
+     
+     
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_search

@@ -1,0 +1,27 @@
+<%= form_with(model: lpublisher, local: true) do |form| %>
+  <% if lpublisher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(lpublisher.errors.count, "error") %> prohibited this lpublisher from being saved:</h2>
+
+      <ul>
+      <% lpublisher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :ID_EDITORE %>
+    <%= form.number_field :ID_EDITORE %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Nome %>
+    <%= form.text_field :Nome %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

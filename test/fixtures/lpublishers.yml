@@ -2,8 +2,12 @@
 
 one:
   ID_EDITORE: 1
-  Nome: MyString
+  Nome: "primo editore"
 
 two:
-  ID_EDITORE: 1
-  Nome: MyString
+  ID_EDITORE: 2
+  Nome: "Editore due"
+
+three:
+  ID_EDITORE: 3
+  Nome: "Questo è l' editore numero 3"  

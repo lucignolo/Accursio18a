@@ -1,17 +1,29 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   tabella: 1
-  campo: 1
-  argomento: MyString
-  data: 2019-03-25
+  campo: 2
+  argomento: "MyString"
+  data: 2019-03-18
   occorrenze: 1
-  tipo: 1
+  tipo: 3
 
 two:
+  id: 2
   tabella: 1
-  campo: 1
-  argomento: MyString
-  data: 2019-03-25
+  campo: 2
+  argomento: "editor"
+  data: 2019-03-18
   occorrenze: 1
-  tipo: 1
+  tipo: 2
+
+sea21:
+  id: 21
+  tabella: 1
+  campo: 2
+  argomento: "editor"
+  data: 2019-03-18
+  occorrenze: 1
+  tipo: 2
+  

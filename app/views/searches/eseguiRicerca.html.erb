@@ -1,0 +1,12 @@
+<h1>searches#eseguiRicerca-eseguiRicerca.html.erb</h1>
+<h1>Prova vista per eseguiRicerca </h1>
+<p>search_id: <%=@search.id %></p>
+<p>search_tabella: <%=@search.tabella %></p>
+<p>search_campo: <%=@search.campo %></p>
+<p>search_tipo: <%=@search.tipo %></p>
+<p>search_argomento: <%=@search.argomento %></p>
+<p>codice: <%=@codice %></p>
+</br>
+<p>Risultati ricerca: <%= @risultati %></p>
+</br>
+<%= link_to 'Search Record', eseric_path(@search) %>

@@ -1,5 +1,7 @@
 class Search < ApplicationRecord
-    SELOPTIONS = [['Standard', 1],['LIKE', 2],['perDATA',3]]
+    SELOPTIONS = [['Standard', 1],['LIKEmez', 2],
+                                  ['LIKEini', 3], ['LIKEfin', 4],
+                                  ['perDATA',5]]
     SEL_OPTIONS_TABELLE = [['lpublishers',1],['publishers',2],['lbooks',3],['books',4]]
     SEL_OPTIONS_CAMPI = [['ID_EDITORE',1],['Nome',2]]
     def self.prendiPrimo(costante,numero)

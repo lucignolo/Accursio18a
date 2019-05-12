@@ -1,7 +1,7 @@
 class LpublishersController < ApplicationController
-	def index()
+  before_action :set_lpublisher, only: [:show, :edit, :update, :destroy]
 
-
+	def index() 
     mioHash = analizzaScope(params[:scope], /^(likeat)(.+)$/)
     mioNome = mioHash[:nome]
     mioPara = mioHash[:para] 
@@ -28,6 +28,52 @@ class LpublishersController < ApplicationController
        @lpubs = Lpublisher.ssqq(5) #@lpublishers = Publisher.bidoni.order(:nome).page params[:page]
     end      
 	end
+
+  def edit
+    @lpublisher = Lpublisher.find(params[:id])    
+  end #def edit
+
+  def update
+    respond_to do |format|
+      if @lpublisher.update(lpublisher_params)
+        format.html { redirect_to @lpublisher, notice: 'Lpublisher was successfully updated.' }
+        format.json { render :show, status: :ok, location: @lpublisher }
+      else
+        format.html { render :edit }
+        format.json { render json: @lpublisher.errors, status: :unprocessable_entity }
+      end
+    end        
+  end #def update
+
+  def show
+        @lpublisher = Lpublisher.find(params[:id])
+  end #def show
+
+  # GET /ellepublishers/new
+  def new
+    @lpublisher = Lpublisher.new
+  end
+
+  # POST /ellepublishers
+  # POST /ellepublishers.json
+  def create
+    @lpublisher = Lpublisher.new(lpublisher_params)
+
+    respond_to do |format|
+      if @lpublisher.save
+        format.html { redirect_to @lpublisher, notice: 'Lpublisher was successfully created.' }
+        format.json { render :show, status: :created, location: @lpublisher }
+      else
+        format.html { render :new }
+        format.json { render json: @lpublisher.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  
+
+
+
 
 private
     # Use callbacks to share common setup or constraints between actions.

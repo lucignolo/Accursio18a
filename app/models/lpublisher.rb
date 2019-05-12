@@ -13,6 +13,12 @@ class Lpublisher < ApplicationRecord
   # vecchio funzionante scope :likeat, ->(parametro='%at%') { where("Nome LIKE ?",parametro)}
   scope :likeat, ->(parametro='%at%') { where("Nome LIKE ?",parametro)}
 
+  #modifiche da C9 il 19/04/2019
+  scope :nome_likeat_mid, ->(parametro='%at%') { where("Nome LIKE ?",parametro)}
+  scope :nome_likeat_fin, ->(parametro='%at') { where("Nome LIKE ?",parametro)}
+  scope :nome_likeat_ini, ->(parametro='at%') { where("Nome LIKE ?",parametro)}
+  #
+
 
   # Il seguente metodo di classe serve come base per una analisi del contenuto della tabella lpublishers
       TITOLO = "Numero di Record con Nome vuoto"
